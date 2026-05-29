@@ -8,13 +8,13 @@
 
 template<typename T>
 class BST {
-private:
+ private:
     struct Node {
         T key;
         int count;
         Node* left;
         Node* right;
-        Node(const T& k) : key(k), count(1), left(nullptr), right(nullptr) {}
+        explicit Node(const T& k) : key(k), count(1), left(nullptr), right(nullptr) {}
     };
 
     Node* root;
@@ -61,7 +61,7 @@ private:
         delete node;
     }
 
-public:
+ public:
     BST() : root(nullptr), sz(0) {}
     ~BST() { clear(root); }
 
@@ -81,9 +81,13 @@ public:
 
     int size() const { return sz; }
 
-    std::vector<std::pair<T, int>> getPairs() const {
+    std::vector<std::pair<T, int>> getSortedByFreq() const {
         std::vector<std::pair<T, int>> result;
         collect(root, result);
+        std::sort(result.begin(), result.end(),
+                  [](const std::pair<T, int>& a, const std::pair<T, int>& b) {
+                      return a.second > b.second;
+                  });
         return result;
     }
 };
