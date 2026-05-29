@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <utility>
 
 template <typename T>
 class BST {
@@ -16,7 +17,7 @@ class BST {
         Node* left;
         Node* right;
 
-        Node(T val) : value(val), count(1), left(nullptr), right(nullptr) {}
+        explicit Node(T val) : value(val), count(1), left(nullptr), right(nullptr) {}
     };
 
     Node* root;
