@@ -14,10 +14,10 @@ void makeTree(BST<std::string>& tree, const char* filename) {
 
     std::string word;
     char c;
+    std::locale loc;
     while (file.get(c)) {
-        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
-            if (c >= 'A' && c <= 'Z')
-                c = c + ('a' - 'A');
+        if (std::isalpha(c, loc)) {
+            c = std::tolower(c, loc);
             word.push_back(c);
         } else {
             if (!word.empty()) {
@@ -26,8 +26,9 @@ void makeTree(BST<std::string>& tree, const char* filename) {
             }
         }
     }
-    if (!word.empty())
+    if (!word.empty()) {
         tree.add(word);
+    }
     file.close();
 }
 
@@ -44,7 +45,8 @@ void printFreq(BST<std::string>& tree) {
 
     for (const auto& p : pairs) {
         std::cout << p.first << " : " << p.second << std::endl;
-        if (out)
+        if (out) {
             out << p.first << " : " << p.second << std::endl;
+        }
     }
 }
