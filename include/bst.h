@@ -44,7 +44,7 @@ class BST {
     }
 
     int getDepth(Node* node) const {
-        if (!node) return 0;
+        if (!node) return -1;
         int leftDepth = getDepth(node->left);
         int rightDepth = getDepth(node->right);
         return 1 + (leftDepth > rightDepth ? leftDepth : rightDepth);
@@ -97,4 +97,5 @@ class BST {
         return list;
     }
 };
+
 #endif  // INCLUDE_BST_H_
